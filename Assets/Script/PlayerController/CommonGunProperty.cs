@@ -1,6 +1,6 @@
 /*
     This is the common class of gun created by Sanju
-    All the Weapon common funcition are implement here
+    All the Weapon common function are implement here
 */
 
 using System.Collections;
@@ -11,7 +11,7 @@ public class CommonGunProperty : MonoBehaviour
 {
    public void PickGunByPlayer(){
     /*
-    * Function will destry the rigidbody
+    * Function will destroy the rigidbody
     */
         Destroy(GetComponent<Rigidbody>());
    }
@@ -20,5 +20,7 @@ public class CommonGunProperty : MonoBehaviour
     * Function will Add the rigidbody on item
     */
         gameObject.AddComponent<Rigidbody>();
+        gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
+        gameObject.transform.parent = null;
    }
 }

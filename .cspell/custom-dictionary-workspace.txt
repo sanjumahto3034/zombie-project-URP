@@ -1,0 +1,8 @@
+# Custom Dictionary Words
+Behaviour
+Coordinatesto
+IDEL
+Lerp
+MonoBehaviour
+mullzle
+Sanju

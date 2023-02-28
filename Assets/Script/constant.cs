@@ -1,5 +1,5 @@
-using UnityEngine;
-public class constant : MonoBehaviour  {
+// using UnityEngine;
+public partial class constant   {
 
     public const string MOBILE = "mobile";
     public const string PC = "pc";
@@ -7,5 +7,6 @@ public class constant : MonoBehaviour  {
     public const string IS_RUNNING = "isRunning";
     public const string IS_IDEL = "isIdeal";
 
+    public const string TAG_ENEMY = "enemy";
 
 }
