@@ -12,7 +12,7 @@ public class PlayerAnimationController : MonoBehaviour
     private string IS_WALKING = "isWalking";
     private string IS_RUNNING = "isRunning";
     private string IS_IDEL = "isIdeal";
-    private string IS_PLAYER_HAS_WEAPON = "isPlayerWithWeapon";
+    
 
     private string animationType = "Pistol";
     private bool isPlayerHaveGun = false;

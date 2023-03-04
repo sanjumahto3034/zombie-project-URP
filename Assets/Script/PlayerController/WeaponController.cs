@@ -23,13 +23,11 @@ public class WeaponController : MonoBehaviour
     public GameObject SecondaryGunBG;
 
 
-
     /*
         * 1 Set primary gun as current gun
         * 2 Set Seconday gun as current gun
     */
     private int currentGun;
-
 
 
     void Start()

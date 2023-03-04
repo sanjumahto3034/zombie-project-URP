@@ -12,5 +12,9 @@ public static class constant   {
     public static string GUN = "gun";
     public static string IS_PLAYER_HAS_WEAPON = "isPlayerWithWeapon";
     public static string WALK_RANDOM_ON_MAP = "walkRandomOnMap";
+    public static string PLAYER = "player";
+
+    public static string CHASE_PLAYER = "chasePlayer";
+    public static string DEAD = "Dead";
 
 }

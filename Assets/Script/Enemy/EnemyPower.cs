@@ -26,7 +26,9 @@ public class EnemyPower : MonoBehaviour
     }
     public void KillEnemy()
     {
-        Destroy(gameObject);
+        EnemyAI enemyAI = GetComponent<EnemyAI>();
+        enemyAI.EnemyDead();
+        // Destroy(gameObject);
     }
 
     public int GetEnemyHealth(){
