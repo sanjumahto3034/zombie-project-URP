@@ -87,15 +87,27 @@ public class WeaponController : MonoBehaviour
             * Shoot Gun
             * Take input from Left-Key Mouse
         */
+       
+
         if (context.started)
         {
             if (currentGun == 1 && primaryGun)
             {
-                primaryGun.GetComponent<Shooting>().FireGun();
+                primaryGun.GetComponent<Shooting>().FireGun(1);
             }
             else if (currentGun == 2 && SecondaryGun)
             {
-                SecondaryGun.GetComponent<Shooting>().FireGun();
+                SecondaryGun.GetComponent<Shooting>().FireGun(1);
+            }
+        }
+        else if (context.canceled){
+            if (currentGun == 1 && primaryGun)
+            {
+                primaryGun.GetComponent<Shooting>().FireGun(0);
+            }
+            else if (currentGun == 2 && SecondaryGun)
+            {
+                SecondaryGun.GetComponent<Shooting>().FireGun(0);
             }
         }
     }

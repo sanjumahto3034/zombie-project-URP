@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class EnemyRandomMovement : MonoBehaviour
 {
+    public float offsetStandFromPlayer = 5f;
     public float visionRange = 100;
     private NavMeshAgent agent;
     public float petrolArea = 30;
@@ -13,6 +14,7 @@ public class EnemyRandomMovement : MonoBehaviour
     private bool isPetroling = true;
     private bool isChasing = false;
     private bool isOnAttackPosition = false;
+    private bool isZombieAlive = true;
 
     private Vector3 petrolPoint;
 
@@ -23,10 +25,11 @@ public class EnemyRandomMovement : MonoBehaviour
     private float minZ;
     private float maxZ;
 
-    private int testInt = 0;
     private EnemyAI enemyAI;
 
     private GameObject player;
+
+    
     void Start()
     {
 
@@ -62,6 +65,10 @@ public class EnemyRandomMovement : MonoBehaviour
 
     void Update()
     {
+        if(!isZombieAlive)return;
+
+
+        
         RaycastHit hit;
 
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, visionRange))
@@ -74,6 +81,7 @@ public class EnemyRandomMovement : MonoBehaviour
                 isPetroling = false;
                 isChasing = true;
                 isOnAttackPosition = false;
+                setZombieIdel(false);
             }
 
         }
@@ -89,6 +97,7 @@ public class EnemyRandomMovement : MonoBehaviour
         else if(!isOnAttackPosition && !isPetroling && isChasing){
             chasingPlayer();
         }
+       
 
 
 
@@ -118,10 +127,23 @@ public class EnemyRandomMovement : MonoBehaviour
         result = Vector3.zero;
         return false;
     }
+    public void setZombieIdel(bool zombieStatus){
+        if(zombieStatus){
+            agent.isStopped = zombieStatus;
+            agent.speed = 0;
+            isOnAttackPosition = false;
+            isPetroling = false;
+            isChasing = false;
+        }
+        else{
+            agent.isStopped = zombieStatus;
+        }
+       
+    }
 
     private void chasingPlayer(){
         agent.SetDestination(player.transform.position);
-        if(agent.remainingDistance>5f){
+        if(agent.remainingDistance>=offsetStandFromPlayer){
             agent.isStopped = false;
             setZombieSpeed(enemyAI.getRunSpeed());
         }
@@ -141,6 +163,7 @@ public class EnemyRandomMovement : MonoBehaviour
     private void attackOnPlayer(){
         agent.isStopped = true;
         Debug.Log("Attacking");
+        enemyAI.attackOnPlayer();
     }
 
     private void getRandomCoordinatestoMove()

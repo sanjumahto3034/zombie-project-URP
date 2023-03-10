@@ -18,6 +18,7 @@ public class EnemyAI : MonoBehaviour
     private float maxZ;
     private Vector3 petrolPoints;
     private Animator anim;
+    private EnemyRandomMovement enemyRandomMovement;
 
     void Start()
     {
@@ -28,7 +29,7 @@ public class EnemyAI : MonoBehaviour
         // getRandomCoordinatestoMove();
         // StartCoroutine(Scheduler(4));
         anim = GetComponent<Animator>();
-
+        enemyRandomMovement = GetComponent<EnemyRandomMovement>();
         setZombieType();
 
     }
@@ -43,13 +44,16 @@ public class EnemyAI : MonoBehaviour
         {
             case ZombieInitType.CrawlBite:
                 anim.SetTrigger(constant.CRAWL_BITE_IDEL);
+                enemyRandomMovement.setZombieIdel(true);
                 break;
 
             case ZombieInitType.IdelStand:
                 anim.SetTrigger(constant.IDEL_STAND);
+                enemyRandomMovement.setZombieIdel(true);
                 break;
             case ZombieInitType.WalkRandom:
                 anim.SetTrigger(constant.WALK_RANDOM_ON_MAP);
+                enemyRandomMovement.setZombieIdel(false);
                 // gameObject.AddComponent<EnemyRandomMovement>();
                 // GetComponent<EnemyRandomMovement>().setZombieSpeed(walkSpeed);
                 break;
@@ -78,6 +82,7 @@ public class EnemyAI : MonoBehaviour
     }
 
 
+
     private void getRandomCoordinatestoMove()
     {
         /*
@@ -91,8 +96,10 @@ public class EnemyAI : MonoBehaviour
     public void SetChasePlayer(bool _chase)
     {
         anim.SetBool(constant.CHASE_PLAYER, _chase);
+        anim.SetBool(constant.IS_ATTACKING,false);
     }
 
+    
 
     public float getWalkSpeed()
     {
@@ -115,8 +122,13 @@ public class EnemyAI : MonoBehaviour
         * @param int which show delay time
         * This function will destroy gameObject after "@param _time" delay
         */
+        enemyRandomMovement.setZombieIdel(true);
         yield return new WaitForSeconds(_time);
         Destroy(gameObject);
+    }
+    public void attackOnPlayer(){
+        anim.SetBool(constant.IS_ATTACKING,true);
+        anim.SetBool(constant.CHASE_PLAYER,false);
     }
 
 }

@@ -16,5 +16,11 @@ public static class constant   {
 
     public static string CHASE_PLAYER = "chasePlayer";
     public static string DEAD = "Dead";
+    public static string IS_ATTACKING = "isAttacking";
+
+    public static int GUN_FIRE_AUTO = 1;
+    public static int GUN_FIRE_SINGLE = 2;
+    public static int GUN_FIRE_STOP = 0;
+
 
 }
