@@ -67,6 +67,8 @@ public class WeaponController : MonoBehaviour
             * Pick Item from ground
             * Take input from F-Key
         */
+        Debug.Log("[Weapon Controller Pick GUn]");
+
         if (context.started) pickGunCall = true;
     }
     public void DropGun(InputAction.CallbackContext context)

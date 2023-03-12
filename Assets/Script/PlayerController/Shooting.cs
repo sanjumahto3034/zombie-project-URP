@@ -17,7 +17,7 @@ public class Shooting : MonoBehaviour
 
 
 
-    private float perBulletDelay = 1f;
+    public float perBulletDelay = 1f;
     private bool isReloading = false;
     private bool isFiring = false;
 
@@ -34,9 +34,7 @@ public class Shooting : MonoBehaviour
     {
         if (gunType == GunType.AUTO)
         {
-            Debug.Log(TAG_SHOOTING + " " + "gunType : auto");
             isFiring = (_invoke == constant.GUN_FIRE_AUTO) ? true : false;
-            Debug.Log(TAG_SHOOTING + " " + "gunType : " + isFiring);
 
             if (isFiring) StartCoroutine(Scheduler());
             else StopCoroutine(Scheduler());

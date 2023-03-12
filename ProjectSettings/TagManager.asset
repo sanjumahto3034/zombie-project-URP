@@ -7,6 +7,8 @@ TagManager:
   - gun
   - enemy
   - player
+  - Fire
+  - floor
   layers:
   - Default
   - TransparentFX
@@ -14,7 +16,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Building
   - 
   - 
   - 

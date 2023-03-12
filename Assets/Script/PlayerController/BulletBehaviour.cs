@@ -35,7 +35,12 @@ public class BulletBehaviour : MonoBehaviour
             GameObject _enemy = other.gameObject;
             _enemy.GetComponent<EnemyPower>().bulletHitToEnemy(bulletDamage);
             print(_enemy.GetComponent<EnemyPower>().GetEnemyHealth());
+            Destroy(gameObject);
        }
+       else if(other.gameObject.tag == constant.WALL || other.gameObject.tag == constant.FLOOR){
+            Destroy(gameObject);
+       }
+       
     }
 
 
