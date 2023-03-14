@@ -30,7 +30,7 @@ public class EnemyRandomMovement : MonoBehaviour
     private GameObject player;
 
     
-    void Start()
+    void Awake()
     {
 
         minX = transform.position.x - petrolArea;
@@ -46,6 +46,9 @@ public class EnemyRandomMovement : MonoBehaviour
 
     public void setPetroling(bool _petrol)
     {
+        /*
+        * Set the enemy to petroling mode 
+        */
         isPetroling = _petrol;
         agent.isStopped = true;
     }
@@ -56,7 +59,6 @@ public class EnemyRandomMovement : MonoBehaviour
         * Set zombie Nave Mesh Agent speed take
         * @param float speed
         */
-                Debug.Log(TAG+"Remaining Distance of enemy "+moveSpeed+"  :  "+agent.speed);
 
 
         if(moveSpeed != agent.speed)agent.speed = moveSpeed;
@@ -76,7 +78,6 @@ public class EnemyRandomMovement : MonoBehaviour
                
             if (hit.transform.gameObject.tag == constant.PLAYER)
             {
-                Debug.DrawRay(transform.position,transform.forward,Color.green,1f);
                 enemyAI.SetChasePlayer(true);
                 isPetroling = false;
                 isChasing = true;
@@ -128,6 +129,9 @@ public class EnemyRandomMovement : MonoBehaviour
         return false;
     }
     public void setZombieIdel(bool zombieStatus){
+        /*
+        * Put the enemy in ideal stage
+        */
         if(zombieStatus){
             agent.isStopped = zombieStatus;
             agent.speed = 0;
@@ -142,6 +146,9 @@ public class EnemyRandomMovement : MonoBehaviour
     }
 
     private void chasingPlayer(){
+        /*
+        * Put the enemy in casing state to player
+        */
         agent.SetDestination(player.transform.position);
         if(agent.remainingDistance>=offsetStandFromPlayer){
             agent.isStopped = false;
@@ -153,6 +160,9 @@ public class EnemyRandomMovement : MonoBehaviour
 
     }
     private void petroling(){
+        /*
+        * Set the enemy to petroling stage at the fixed radius
+        */
         agent.isStopped = false;
         Vector3 point;
        if (GetRandomPoints(out point) &&  (agent.remainingDistance <= agent.stoppingDistance)) agent.SetDestination(point);
@@ -161,8 +171,10 @@ public class EnemyRandomMovement : MonoBehaviour
     }
 
     private void attackOnPlayer(){
+        /*
+        * enemy will stop and start attack to player
+        */
         agent.isStopped = true;
-        Debug.Log("Attacking");
         enemyAI.attackOnPlayer();
     }
 
@@ -178,6 +190,9 @@ public class EnemyRandomMovement : MonoBehaviour
         petrolPoint = new Vector3(_tempX, transform.position.y, _tempZ);
     }
     public void EnemyDead(){
+        /*
+        * Stop the enemy at current place and the enemy is dead now
+        */
         agent.isStopped = true;
         agent.speed = 0;
 

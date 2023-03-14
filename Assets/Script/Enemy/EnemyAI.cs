@@ -95,6 +95,9 @@ public class EnemyAI : MonoBehaviour
     }
     public void SetChasePlayer(bool _chase)
     {
+        /*
+        * Set enemy to chasing state
+        */
         anim.SetBool(constant.CHASE_PLAYER, _chase);
         anim.SetBool(constant.IS_ATTACKING,false);
     }
@@ -103,15 +106,24 @@ public class EnemyAI : MonoBehaviour
 
     public float getWalkSpeed()
     {
+        /*
+        * @return the current walk speed of enemy
+        */
         return walkSpeed;
     }
     public float getRunSpeed()
     {
+        /*
+        * @return the current running speed of enemy
+        */
         return runSpeed;
     }
 
     public void EnemyDead()
     {
+        /*
+        * enemy will dead now 
+        */
         GetComponent<EnemyRandomMovement>().EnemyDead();
         anim.SetTrigger(constant.DEAD);
         StartCoroutine(DestroyEnemyAfterDelay(4));
@@ -127,6 +139,9 @@ public class EnemyAI : MonoBehaviour
         Destroy(gameObject);
     }
     public void attackOnPlayer(){
+        /*
+        * Player will start attack to the enemy
+        */
         anim.SetBool(constant.IS_ATTACKING,true);
         anim.SetBool(constant.CHASE_PLAYER,false);
     }

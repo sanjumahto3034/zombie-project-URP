@@ -9,6 +9,7 @@ TagManager:
   - player
   - Fire
   - floor
+  - wall
   layers:
   - Default
   - TransparentFX

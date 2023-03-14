@@ -31,10 +31,9 @@ public class BulletBehaviour : MonoBehaviour
     
     void OnCollisionEnter(Collision other)
     {
-       if(other.gameObject.tag == TAG_ENEMY){
+       if(other.gameObject.tag == constant.TAG_ENEMY){
             GameObject _enemy = other.gameObject;
             _enemy.GetComponent<EnemyPower>().bulletHitToEnemy(bulletDamage);
-            print(_enemy.GetComponent<EnemyPower>().GetEnemyHealth());
             Destroy(gameObject);
        }
        else if(other.gameObject.tag == constant.WALL || other.gameObject.tag == constant.FLOOR){
@@ -49,12 +48,11 @@ public class BulletBehaviour : MonoBehaviour
 
 
     private void print(string _print){
-        Debug.Log(TAG_BULLET_BEHAVIOUR+" "+_print);
     }
 
 
 
-    private const string TAG_ENEMY = "enemy";
+    
     private const string TAG_BULLET_BEHAVIOUR ="[Bullet Behaviour]";
    
 

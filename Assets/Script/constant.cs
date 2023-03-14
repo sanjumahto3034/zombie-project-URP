@@ -18,10 +18,14 @@ public static class constant   {
     public static string DEAD = "Dead";
     public static string IS_ATTACKING = "isAttacking";
     public static string FLOOR = "floor";
-
     public static int GUN_FIRE_AUTO = 1;
-    public static int GUN_FIRE_SINGLE = 2;
+    public static int GUN_FIRE_SINGLE = 1;
     public static int GUN_FIRE_STOP = 0;
+    public static string LOG_TAG = "[ZOMBIE-FPS-SHOOTING] ";
+
+    public static int IS_FIRING = 1;
+    public static int IS_NOT_FIRING = 0;
+
 
 
 }

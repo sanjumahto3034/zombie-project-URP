@@ -51,24 +51,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "MouseX",
-                    "type": "Value",
-                    "id": "46da897e-ebb2-41e2-84a2-310a976134b4",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "MouseY",
-                    "type": "Value",
-                    "id": "878da70a-99e1-4e5b-b48f-5e31b7557384",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "Run",
                     "type": "Button",
                     "id": "f0dd7f97-9fa8-4dec-a4c2-a3ddcbce4a68",
@@ -194,6 +176,17 @@
                 },
                 {
                     "name": "",
+                    "id": "1ebf6f99-a626-44a0-8f48-162c5efcc975",
+                    "path": "<Touchscreen>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "MouseInput",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "b6ae37f6-a1bd-4e31-9691-ce8104c1e3c8",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
@@ -211,28 +204,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Scope",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "04886e5d-4d00-40fb-9d36-19796a51020e",
-                    "path": "<Mouse>/delta/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard and Mouse",
-                    "action": "MouseX",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f15415c1-168d-4217-ba7b-7fbc749afd4d",
-                    "path": "<Mouse>/delta/y",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard and Mouse",
-                    "action": "MouseY",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -306,6 +277,17 @@
                 },
                 {
                     "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "New control scheme",
+            "bindingGroup": "New control scheme",
+            "devices": [
+                {
+                    "devicePath": "<Touchscreen>",
                     "isOptional": false,
                     "isOR": false
                 }

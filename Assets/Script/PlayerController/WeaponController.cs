@@ -6,8 +6,14 @@ using TMPro;
 public class WeaponController : MonoBehaviour
 {
     public TMP_Text primaryGunText;
+    public TMP_Text primaryGunBulletField;
     public TMP_Text secondaryGunText;
+    public TMP_Text secondaryGunBulletField;
 
+    public GameObject pickUI;
+
+
+    
 
     private bool pickGunCall = false;
     public Transform gunHoldingPoint;
@@ -32,7 +38,7 @@ public class WeaponController : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("[Weapon Controller INIT]");
+        pickUI.SetActive(false);
         ResetPoints = new Vector3(0, 0, 0);
 
     }
@@ -47,10 +53,15 @@ public class WeaponController : MonoBehaviour
         {
             if (hit.transform.gameObject.tag == "gun" && pickGunCall)
             {
+                pickUI.SetActive(true);
                 AddGunInPlayerHand(hit.transform.gameObject, gunHoldingPoint);
-                pickGunCall = false;
+            }
+            else{
+                pickUI.SetActive(false);
             }
         }
+         pickGunCall = false;
+
 
 
     }
@@ -67,7 +78,6 @@ public class WeaponController : MonoBehaviour
             * Pick Item from ground
             * Take input from F-Key
         */
-        Debug.Log("[Weapon Controller Pick GUn]");
 
         if (context.started) pickGunCall = true;
     }
@@ -173,6 +183,8 @@ public class WeaponController : MonoBehaviour
         {
             primaryGun = _gun;
             primaryGunText.text = _gun.name;
+            string _bulletText = _gun.GetComponent<Shooting>().getGunBulletTextInString();
+            primaryGunBulletField.text = _bulletText;
             PutGunOnHand(_gun, _holdingPoints);
             SetPrimaryGun(currentGun);
             currentGun = 1;
@@ -182,6 +194,8 @@ public class WeaponController : MonoBehaviour
         {
             SecondaryGun = _gun;
             secondaryGunText.text = _gun.name;
+            string _bulletText = _gun.GetComponent<Shooting>().getGunBulletTextInString();
+            secondaryGunBulletField.text = _bulletText;
             PutGunOnHand(_gun, _holdingPoints);
             SetPrimaryGun(currentGun);
             Debug.Log("[Gun Added in Inventory 2]");
@@ -189,6 +203,9 @@ public class WeaponController : MonoBehaviour
     }
     private void PutGunOnHand(GameObject _gun, Transform _holdingPoints)
     {
+        /*
+        * This function will put gun in the player inventory
+        */
         _gun.GetComponent<Rigidbody>().isKinematic = true;
         _gun.GetComponent<Rigidbody>().velocity = Vector3.zero;
         _gun.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
@@ -226,7 +243,59 @@ public class WeaponController : MonoBehaviour
         }
 
     }
+    public void setBulletRemainingText(string _text){
+        /*
+        * This function will set test on canvas gun section
+        * Add text as format (remainingBullet | maximum bullet player has)
+        */
+        if (currentGun == 1 && primaryGun)
+        {
+            primaryGunBulletField.text = _text;
+        }
+        else if (currentGun == 2 && SecondaryGun)
+        {
+            secondaryGunBulletField.text = _text;
+        }
+    }
 
+      public void MOBILE_CONTROL_PICK_GUN()
+    {
+        /*
+        * Pick gun from ground
+        * This function will trigger from canvas 
+        * @mobile UI
+        */
+        pickGunCall = true;
+    }
+    public void MOBILE_CONTROL_SHOOT(int type)
+    {
+        /*
+        * Shoot the bullet from gun
+        * This function will trigger from canvas 
+        * @mobile UI
+        */
 
+        if (type == constant.IS_FIRING)
+        {
+            if (currentGun == 1 && primaryGun)
+            {
+                primaryGun.GetComponent<Shooting>().FireGun(1);
+            }
+            else if (currentGun == 2 && SecondaryGun)
+            {
+                SecondaryGun.GetComponent<Shooting>().FireGun(1);
+            }
+        }
+        else if (type == constant.IS_NOT_FIRING){
+            if (currentGun == 1 && primaryGun)
+            {
+                primaryGun.GetComponent<Shooting>().FireGun(0);
+            }
+            else if (currentGun == 2 && SecondaryGun)
+            {
+                SecondaryGun.GetComponent<Shooting>().FireGun(0);
+            }
+        }
+    }
 
 }

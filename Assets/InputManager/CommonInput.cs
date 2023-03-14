@@ -73,24 +73,6 @@ public partial class @CommonInput : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""MouseX"",
-                    ""type"": ""Value"",
-                    ""id"": ""46da897e-ebb2-41e2-84a2-310a976134b4"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""MouseY"",
-                    ""type"": ""Value"",
-                    ""id"": ""878da70a-99e1-4e5b-b48f-5e31b7557384"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
                     ""name"": ""Run"",
                     ""type"": ""Button"",
                     ""id"": ""f0dd7f97-9fa8-4dec-a4c2-a3ddcbce4a68"",
@@ -216,6 +198,17 @@ public partial class @CommonInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""1ebf6f99-a626-44a0-8f48-162c5efcc975"",
+                    ""path"": ""<Touchscreen>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""MouseInput"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""b6ae37f6-a1bd-4e31-9691-ce8104c1e3c8"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
@@ -233,28 +226,6 @@ public partial class @CommonInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Scope"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""04886e5d-4d00-40fb-9d36-19796a51020e"",
-                    ""path"": ""<Mouse>/delta/x"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""MouseX"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f15415c1-168d-4217-ba7b-7fbc749afd4d"",
-                    ""path"": ""<Mouse>/delta/y"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""MouseY"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -332,6 +303,17 @@ public partial class @CommonInput : IInputActionCollection2, IDisposable
                     ""isOR"": false
                 }
             ]
+        },
+        {
+            ""name"": ""New control scheme"",
+            ""bindingGroup"": ""New control scheme"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Touchscreen>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
         }
     ]
 }");
@@ -342,8 +324,6 @@ public partial class @CommonInput : IInputActionCollection2, IDisposable
         m_PlayerMovement_MouseInput = m_PlayerMovement.FindAction("MouseInput", throwIfNotFound: true);
         m_PlayerMovement_Fire = m_PlayerMovement.FindAction("Fire", throwIfNotFound: true);
         m_PlayerMovement_Scope = m_PlayerMovement.FindAction("Scope", throwIfNotFound: true);
-        m_PlayerMovement_MouseX = m_PlayerMovement.FindAction("MouseX", throwIfNotFound: true);
-        m_PlayerMovement_MouseY = m_PlayerMovement.FindAction("MouseY", throwIfNotFound: true);
         m_PlayerMovement_Run = m_PlayerMovement.FindAction("Run", throwIfNotFound: true);
         m_PlayerMovement_PIck = m_PlayerMovement.FindAction("PIck", throwIfNotFound: true);
         m_PlayerMovement_Drop = m_PlayerMovement.FindAction("Drop", throwIfNotFound: true);
@@ -413,8 +393,6 @@ public partial class @CommonInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_MouseInput;
     private readonly InputAction m_PlayerMovement_Fire;
     private readonly InputAction m_PlayerMovement_Scope;
-    private readonly InputAction m_PlayerMovement_MouseX;
-    private readonly InputAction m_PlayerMovement_MouseY;
     private readonly InputAction m_PlayerMovement_Run;
     private readonly InputAction m_PlayerMovement_PIck;
     private readonly InputAction m_PlayerMovement_Drop;
@@ -429,8 +407,6 @@ public partial class @CommonInput : IInputActionCollection2, IDisposable
         public InputAction @MouseInput => m_Wrapper.m_PlayerMovement_MouseInput;
         public InputAction @Fire => m_Wrapper.m_PlayerMovement_Fire;
         public InputAction @Scope => m_Wrapper.m_PlayerMovement_Scope;
-        public InputAction @MouseX => m_Wrapper.m_PlayerMovement_MouseX;
-        public InputAction @MouseY => m_Wrapper.m_PlayerMovement_MouseY;
         public InputAction @Run => m_Wrapper.m_PlayerMovement_Run;
         public InputAction @PIck => m_Wrapper.m_PlayerMovement_PIck;
         public InputAction @Drop => m_Wrapper.m_PlayerMovement_Drop;
@@ -460,12 +436,6 @@ public partial class @CommonInput : IInputActionCollection2, IDisposable
                 @Scope.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnScope;
                 @Scope.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnScope;
                 @Scope.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnScope;
-                @MouseX.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnMouseX;
-                @MouseX.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnMouseX;
-                @MouseX.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnMouseX;
-                @MouseY.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnMouseY;
-                @MouseY.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnMouseY;
-                @MouseY.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnMouseY;
                 @Run.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnRun;
                 @Run.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnRun;
                 @Run.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnRun;
@@ -500,12 +470,6 @@ public partial class @CommonInput : IInputActionCollection2, IDisposable
                 @Scope.started += instance.OnScope;
                 @Scope.performed += instance.OnScope;
                 @Scope.canceled += instance.OnScope;
-                @MouseX.started += instance.OnMouseX;
-                @MouseX.performed += instance.OnMouseX;
-                @MouseX.canceled += instance.OnMouseX;
-                @MouseY.started += instance.OnMouseY;
-                @MouseY.performed += instance.OnMouseY;
-                @MouseY.canceled += instance.OnMouseY;
                 @Run.started += instance.OnRun;
                 @Run.performed += instance.OnRun;
                 @Run.canceled += instance.OnRun;
@@ -534,6 +498,15 @@ public partial class @CommonInput : IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_KeyboardandMouseSchemeIndex];
         }
     }
+    private int m_NewcontrolschemeSchemeIndex = -1;
+    public InputControlScheme NewcontrolschemeScheme
+    {
+        get
+        {
+            if (m_NewcontrolschemeSchemeIndex == -1) m_NewcontrolschemeSchemeIndex = asset.FindControlSchemeIndex("New control scheme");
+            return asset.controlSchemes[m_NewcontrolschemeSchemeIndex];
+        }
+    }
     public interface IPlayerMovementActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -541,8 +514,6 @@ public partial class @CommonInput : IInputActionCollection2, IDisposable
         void OnMouseInput(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnScope(InputAction.CallbackContext context);
-        void OnMouseX(InputAction.CallbackContext context);
-        void OnMouseY(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
         void OnPIck(InputAction.CallbackContext context);
         void OnDrop(InputAction.CallbackContext context);
