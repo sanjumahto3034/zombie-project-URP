@@ -1,5 +1,6 @@
 // using UnityEngine;
 public static class constant   {
+    public static bool IS_NATIVE = true;
     public static string MOBILE = "mobile";
     public static string PC = "pc";
     public static string IS_WALKING = "isWalking";
@@ -25,6 +26,10 @@ public static class constant   {
 
     public static int IS_FIRING = 1;
     public static int IS_NOT_FIRING = 0;
+
+    public static string GAME_SCENE = "Scene_1";
+    public static string DEMO_SCENE = "DemoScene";
+    public static string LOBBY_SCENE = "Lobby Scene";
 
 
 

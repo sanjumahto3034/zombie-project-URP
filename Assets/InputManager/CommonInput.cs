@@ -202,7 +202,7 @@ public partial class @CommonInput : IInputActionCollection2, IDisposable
                     ""path"": ""<Touchscreen>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard and Mouse"",
+                    ""groups"": ""Keyboard and Mouse;New control scheme"",
                     ""action"": ""MouseInput"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

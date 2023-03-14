@@ -13,7 +13,7 @@ public class WeaponController : MonoBehaviour
     public GameObject pickUI;
 
 
-    
+
 
     private bool pickGunCall = false;
     public Transform gunHoldingPoint;
@@ -36,6 +36,7 @@ public class WeaponController : MonoBehaviour
     private int currentGun;
 
 
+
     void Start()
     {
         pickUI.SetActive(false);
@@ -49,18 +50,37 @@ public class WeaponController : MonoBehaviour
             * This function is send ray
         */
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 5f))
+        if (!constant.IS_NATIVE)
         {
-            if (hit.transform.gameObject.tag == "gun" && pickGunCall)
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 5f))
             {
-                pickUI.SetActive(true);
-                AddGunInPlayerHand(hit.transform.gameObject, gunHoldingPoint);
-            }
-            else{
-                pickUI.SetActive(false);
+                if (hit.transform.gameObject.tag == "gun" && pickGunCall)
+                {
+                    AddGunInPlayerHand(hit.transform.gameObject, gunHoldingPoint);
+                }
+               
             }
         }
-         pickGunCall = false;
+        else
+        {
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 5f))
+            {
+                if (hit.transform.gameObject.tag == "gun")
+                {
+                    pickUI.SetActive(true);
+                    if (pickGunCall)
+                    {
+                        AddGunInPlayerHand(hit.transform.gameObject, gunHoldingPoint);
+                    }
+                }
+                else{
+                    pickUI.SetActive(false);
+                }
+            }
+        }
+
+        pickGunCall = false;
+
 
 
 
@@ -99,7 +119,7 @@ public class WeaponController : MonoBehaviour
             * Shoot Gun
             * Take input from Left-Key Mouse
         */
-       
+
 
         if (context.started)
         {
@@ -112,7 +132,8 @@ public class WeaponController : MonoBehaviour
                 SecondaryGun.GetComponent<Shooting>().FireGun(1);
             }
         }
-        else if (context.canceled){
+        else if (context.canceled)
+        {
             if (currentGun == 1 && primaryGun)
             {
                 primaryGun.GetComponent<Shooting>().FireGun(0);
@@ -243,7 +264,8 @@ public class WeaponController : MonoBehaviour
         }
 
     }
-    public void setBulletRemainingText(string _text){
+    public void setBulletRemainingText(string _text)
+    {
         /*
         * This function will set test on canvas gun section
         * Add text as format (remainingBullet | maximum bullet player has)
@@ -258,7 +280,7 @@ public class WeaponController : MonoBehaviour
         }
     }
 
-      public void MOBILE_CONTROL_PICK_GUN()
+    public void MOBILE_CONTROL_PICK_GUN()
     {
         /*
         * Pick gun from ground
@@ -286,7 +308,8 @@ public class WeaponController : MonoBehaviour
                 SecondaryGun.GetComponent<Shooting>().FireGun(1);
             }
         }
-        else if (type == constant.IS_NOT_FIRING){
+        else if (type == constant.IS_NOT_FIRING)
+        {
             if (currentGun == 1 && primaryGun)
             {
                 primaryGun.GetComponent<Shooting>().FireGun(0);

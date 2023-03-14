@@ -58,9 +58,13 @@ public class PlayerMovementManager : MonoBehaviour
 
         float moveSpeed = (isRunning) ? runningSpeed : walkSpeed;
         Vector3 currentVelocity = rb.velocity;
-        moveDirection.x = joystick.Horizontal;
-        moveDirection.y = joystick.Vertical;
-        Debug.Log("[Player Movement] "+joystick.Horizontal+" : "+joystick.Vertical);
+        if (constant.IS_NATIVE)
+        {
+            moveDirection.x = joystick.Horizontal;
+            moveDirection.y = joystick.Vertical;
+        }
+
+        Debug.Log("[Player Movement] " + joystick.Horizontal + " : " + joystick.Vertical);
         Vector3 targetValocity = new Vector3(moveDirection.x, 0, moveDirection.y) * moveSpeed;
         targetValocity = transform.TransformDirection(targetValocity);
         currentVelocity.y = gravityValue;
@@ -125,7 +129,7 @@ public class PlayerMovementManager : MonoBehaviour
     {
         /*
         * @param Vector2 _recoil Amount at Y-Axis
-        * Note need to reset to zero to reset back to no recoil point
+        * Note need to reset to zero to reset back to no recoil from function =>(resetRecoil)
         * Add Custom recoil to the player gun
         * 
         */
@@ -133,6 +137,10 @@ public class PlayerMovementManager : MonoBehaviour
     }
     public void resetRecoil()
     {
+        /*
+        * This function will reset recoil of player gun
+        * It is necessary to reset recoil after apply some amount of recoil 
+        */
         lookDirection = Vector3.zero;
     }
 
@@ -167,6 +175,9 @@ public class PlayerMovementManager : MonoBehaviour
 
     public void MOBILE_CONTROL_JUMP()
     {
+        /*
+        * This function will try from canvas UI 
+        */
         if (isGrounded)
         {
             Vector3 jumpFourceVector = Vector3.zero;
