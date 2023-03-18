@@ -34,4 +34,5 @@ public static class constant   {
 
     public static string TEST_CODE = "test";
     public static string TEST_CODE2 = "test2";
+    public static string TEST_CODE3 = "test3";
 }
