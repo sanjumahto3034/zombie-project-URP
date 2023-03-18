@@ -32,5 +32,5 @@ public static class constant   {
     public static string LOBBY_SCENE = "Lobby Scene";
     public static string MAIN_CAMERA = "MainCamera";
 
-
+    public static string TEST_CODE = "test";
 }
