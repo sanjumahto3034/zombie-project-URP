@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class PlayerMovementManager : MonoBehaviour
 {
@@ -25,14 +26,17 @@ public class PlayerMovementManager : MonoBehaviour
     private PlayerAnimationController animationController;
     public FloatingJoystick joystick;
 
+    private int globalFireTouchControl = 0;
+
+    private int canUserSwipeScreen = 1;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         playerInput = GetComponent<PlayerInput>();
         commonInput = new CommonInput();
-        // Cursor.lockState = CursorLockMode.Locked;
-        // Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         animationController = GetComponent<PlayerAnimationController>();
     }
 
@@ -46,6 +50,7 @@ public class PlayerMovementManager : MonoBehaviour
         rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
         playerVisionCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
         transform.rotation *= Quaternion.Euler(0, lookDirection.x * lookSpeed, 0);
+        lookDirection = Vector2.zero;
     }
     private void MovePlayer()
     {
@@ -59,12 +64,9 @@ public class PlayerMovementManager : MonoBehaviour
         float moveSpeed = (isRunning) ? runningSpeed : walkSpeed;
         Vector3 currentVelocity = rb.velocity;
         if (constant.IS_NATIVE)
-        {
-            moveDirection.x = joystick.Horizontal;
-            moveDirection.y = joystick.Vertical;
-        }
+            MOBILE_TOUCH_CONTROL();
 
-        Debug.Log("[Player Movement] " + joystick.Horizontal + " : " + joystick.Vertical);
+
         Vector3 targetValocity = new Vector3(moveDirection.x, 0, moveDirection.y) * moveSpeed;
         targetValocity = transform.TransformDirection(targetValocity);
         currentVelocity.y = gravityValue;
@@ -122,7 +124,7 @@ public class PlayerMovementManager : MonoBehaviour
             * Get Input From Unity new Input System
             * @param callback context show phases of input
         */
-        lookDirection = context.ReadValue<Vector2>();
+        if (canUserSwipeScreen == CAN_SWIPE) lookDirection = context.ReadValue<Vector2>();
         // Debug.Log("[MOUSE MOVED] -> " + lookDirection);
     }
     public void addRecoilOnPlayerCamera(Vector2 _recoil)
@@ -188,7 +190,35 @@ public class PlayerMovementManager : MonoBehaviour
         }
     }
 
+    private void MOBILE_TOUCH_CONTROL()
+    {
+        // Debug.Log(TAG+Input.touchCount);
+        if (Input.touchCount > 0)
+        {
+            moveDirection.x = joystick.Horizontal;
+            moveDirection.y = joystick.Vertical;
+            foreach (Touch touch in Input.touches)
+            {
+                // int _touchUiId = touch.fingerId;
+                // // EventSystem.current.IsPointerOverGameObject(_touchUiId)
+                // if (touch.deltaPosition.x > 300f)
+                // {
+                //     // canUserSwipeScreen = CAN_SWIPE;
+                //     Debug.Log(TAG + "Touch Successfull");
+                // }else{
+                //     // canUserSwipeScreen = CAN_NOT_SWIPE;
+                // }
+            }
+        }
+    }
+    public void MOBILE_CAMERA_MOVE_TOUCH_AREA(int isTouching){
+        Debug.Log(TAG+isTouching);
+        canUserSwipeScreen = isTouching;
+    }
 
+    private static string TAG = "[PlayerMovementManager] ";
+    private static int CAN_SWIPE = 1;
+    private static int CAN_NOT_SWIPE = 0;
 
 
 

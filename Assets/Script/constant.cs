@@ -30,6 +30,7 @@ public static class constant   {
     public static string GAME_SCENE = "Scene_1";
     public static string DEMO_SCENE = "DemoScene";
     public static string LOBBY_SCENE = "Lobby Scene";
+    public static string MAIN_CAMERA = "MainCamera";
 
 
 

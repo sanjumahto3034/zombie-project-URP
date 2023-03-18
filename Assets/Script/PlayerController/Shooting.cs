@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using EZCameraShake;
 
 public class Shooting : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class Shooting : MonoBehaviour
     public int GunDamage;
     public GameObject bullet;
     public float recoilAmountX;
+    public float recoilSpreadControlDelay;
     public float recoilAmountY;
 
     public GameObject muzzlePoint;
@@ -38,11 +40,12 @@ public class Shooting : MonoBehaviour
 
     private PlayerMovementManager player;
 
-    public WeaponController weaponController;
+    private WeaponController weaponController;
     private float counter;
 
     void Start()
     {
+        weaponController = GameObject.FindGameObjectWithTag(constant.MAIN_CAMERA).GetComponent<WeaponController>();
         muzzlePointTransform = muzzlePoint.GetComponent<Transform>();
         fireSound = muzzlePoint.GetComponent<AudioSource>();
         player = GameObject.FindGameObjectWithTag(constant.PLAYER).GetComponent<PlayerMovementManager>();
@@ -155,10 +158,10 @@ public class Shooting : MonoBehaviour
         }
         if (remainingMagazine > 0 && !isReloading)
         {
-
+            CameraShaker.Instance.ShakeOnce(recoilAmountX,recoilAmountX,recoilSpreadControlDelay,recoilSpreadControlDelay);
             fireSound.Play();
             remainingMagazine--;
-            float recoilX = Random.Range(-recoilAmountX, recoilAmountX);
+            float recoilX = 0f;
             float recoilY = Random.Range(0, recoilAmountY);
             Vector3 recoilPattern = _camera.transform.forward + new Vector3(recoilX, 0, 0);
             player.addRecoilOnPlayerCamera(new Vector2(0, recoilY));

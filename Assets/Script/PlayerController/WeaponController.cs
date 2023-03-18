@@ -288,6 +288,7 @@ public class WeaponController : MonoBehaviour
         * @mobile UI
         */
         pickGunCall = true;
+        Debug.Log("Gun pic methic acads");
     }
     public void MOBILE_CONTROL_SHOOT(int type)
     {
