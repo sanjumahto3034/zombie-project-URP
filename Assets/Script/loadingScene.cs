@@ -26,6 +26,7 @@ public class loadingScene : MonoBehaviour
     void Awake()
     {
         StartCoroutine(Scheduler());
+int test =1;
     }
 
     void Start()
